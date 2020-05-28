@@ -1,0 +1,132 @@
+<!--
+	/**
+	*  Definición de la interfaz 'Sistema de Registro y Estadisticas de Participantes'.
+	*
+	*  Permite registrar, confirmar, listar, exportar e imprimir la entrada al evento de los participantes.
+	*
+	*  @author Jonatha Solorzano <jonathasolorzano@gmail.com>
+	*  @license http://www.gnu.org/licenses/gpl.html
+	*	 GNU General Public License
+	*  @copyright Copyright (c) 2014, FUNDACITE Sucre
+	* 
+	*  @version 2015.04.27
+	*/
+ -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>I Encuentro Regional Sucre Potencia Pesquera y Acuicola</title>
+	<link rel="icon" type="image/png" href="img/ico.png" />
+	<link rel="shortcut icon" href="img/ico.ico"> 
+	<link href="img/ico.ico" type="image/x-icon" rel="shortcut icon" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/ripples.min.css">
+	<link rel="stylesheet" type="text/css" href="css/roboto.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.dropdown.css">
+	<link rel="stylesheet" type="text/css" href="css/material-fullpalette.min.css">
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="bootstrap-table/src/bootstrap-table.css">
+	<script src="js/jquery-1.11.2.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.nouislider.min.js"></script>
+	<script src="js/material.min.js"></script>
+	<script src="js/ripples.min.js"></script>
+	<script src="bootstrap-table/src/bootstrap-table.js"></script>
+	<script src="bootstrap-table/src/locale/bootstrap-table-es-MX.js"></script>
+	<script src="bootstrap-table/src/extensions/export/bootstrap-table-export.js"></script>
+	<script src="bootstrap-table/src/extensions/export/tableExport.js"></script>
+	<script src="bootstrap-table/src/extensions/export/jquery.base64.js"></script>
+	<script src="bootstrap-table/src/extensions/export/ga.js"></script>
+	<!-- <script src="js/validator.js"></script> -->
+
+	<script>
+		function retornar () {
+			$(location).attr('href','index.html');
+		}
+
+		// function actionFormatter(value, row, index) {
+		// 	return [
+		// 		'<a class="" href="javascript:void(0)">',
+		// 			'<i class="imprimir fa fa-print"> Imprimir Certificado</i>',
+		// 		'</a>'
+		// 	].join('');
+		// }
+
+		// window.actionEvents = {
+		// 	'click .imprimir': function (e, value, row, index) {
+		// 		// alert('You click like icon, row: ' + JSON.stringify(row[0]));
+		// 		window.open("data/pdf_foro_acuicultura_certificados.php?cedula=" + row[0]);
+		// 		// console.log(value, row, index);
+		// 	}
+		// };
+	</script>
+
+	<style>
+		html, body, #ventana-modal {
+			background-color: #14B6FF;
+		}
+		.text-header {
+			color: #FFF;
+			font-size: 4em;
+			font-weight: bolder;
+		}
+		.secundary-text {
+			color: #14B6FF;
+		}
+		#cumana {
+			background-color: #FFF;
+			width: 160px;
+			height: 160px;
+			position: absolute;
+			right: 10px;
+			margin-top: 80px;
+			margin-right: 160px;
+			border-top-left-radius: 50%;
+			border-top-right-radius: 50%;
+			border-bottom-left-radius: 50%;
+			border-bottom-right-radius: 50%;
+			vertical-align: middle;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.23), 0px 0px 10px rgba(0, 0, 0, 0.23);
+		}
+		#main {
+			margin-top: 60px;
+		}
+	</style>
+
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron" id="main">
+			<h3 class="text-center">Lista de Ponentes</h3>
+			<div class="row">
+				<div class="col-md-12">
+					<table id="tabla" data-toggle="table" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-pagination="true" data-show-export="true" data-export-types="['csv', 'excel',]" data-url="data/conect.php?action=listar_ponentes">
+						<thead>
+							<tr>
+								<th data-field="cedula" class="col-xs-1">Cédula</th>
+								<th data-field="nombres">Nombres</th>
+								<th data-field="apellidos">Apellidos</th>
+								<th data-field="tipo_asistente">Tipo de Asistente</th>
+								<th data-field="asistencia">Asistencia</th>
+								<th data-field="com_institucion">Comunidad / Institución</th>
+								<th data-field="correo">Correo</th>
+								<!-- <th data-field="action" data-formatter="actionFormatter" data-events="actionEvents" class="col-xs-2"></th> -->
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2 col-md-offset-8 text-right">
+					<button class="btn btn-primary" type="button" id="regresar" onclick="retornar();"><i class="fa fa-reply"></i> Regresar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script>
+	// $('#form-ftas').validator();
+</script>

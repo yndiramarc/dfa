@@ -1,0 +1,313 @@
+<!--
+	/**
+	*  Definición de la interfaz 'Sistema de Registro y Estadisticas de Participantes'.
+	*
+	*  Permite registrar, confirmar, listar, exportar e imprimir la entrada al evento de los participantes.
+	*
+	*  @author Jonatha Solorzano <jonathasolorzano@gmail.com>
+	*  @license http://www.gnu.org/licenses/gpl.html
+	*	 GNU General Public License
+	*  @copyright Copyright (c) 2014, FUNDACITE Sucre
+	* 
+	*  @version 2015.04.27
+	*/
+ -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>I Encuentro Regional Sucre Potencia Pesquera y Acuicola</title>
+	<link rel="icon" type="image/png" href="img/ico.png" />
+	<link rel="shortcut icon" href="img/ico.ico"> 
+	<link href="img/ico.ico" type="image/x-icon" rel="shortcut icon" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/roboto.min.css">
+	<link rel="stylesheet" type="text/css" href="css/material-fullpalette.min.css">
+	<link rel="stylesheet" type="text/css" href="css/ripples.min.css">
+	<link rel="stylesheet" type="text/css" href="css/snackbar.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.dropdown.css">
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
+	<script src="js/jquery-1.11.2.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/ripples.min.js"></script>
+	<script src="js/material.min.js"></script>
+	<script src="js/snackbar.min.js"></script>
+	<script src="js/jquery.nouislider.min.js"></script>
+	<!-- <script src="js/validator.js"></script> -->
+
+	<script>
+		$(function() {
+			$.material.init();
+			$('#cedula').focus();
+		});
+
+		setInterval(function estadisticas () {
+			$.ajax({
+				data: 
+				{
+					action: "est"
+				},
+				url: 'data/conect.php',
+				type: 'POST',
+				dataType:'json',
+				beforeSend: function ()
+				{
+					// $("#notify").attr('data-content', 'Guardando, por favor espere..!');
+					// $("#notify").snackbar("show");
+				},
+				success:  function (array_est)
+				{
+					$("#cantidad_e").html(array_est[0]);
+					$("#cantidad_fp").html(array_est[1]);
+					$("#cantidad_fpv").html(array_est[2]);
+					$("#cantidad_c").html(array_est[3]);
+					// $("#cantidad_col").html(array_est[4]);
+					$("#total_p").html(array_est[5]);
+				}
+			});
+		},1000);
+	</script>
+
+	<style>
+		html, body, #ventana-modal {
+			background-color: #14B6FF;
+		}
+		html, body {
+			background-image: url(img/logo.png);
+			background-position: center top;
+			background-repeat: no-repeat;
+			background-size: 100%;
+			/*opacity: 0.5;*/
+		}
+		.text-header {
+			color: #FFF;
+			font-size: 4em;
+			font-weight: bolder;
+		}
+		.secundary-text {
+			color: #14B6FF;
+		}
+	</style>
+
+</head>
+<body>
+	<div class="navbar navbar-inverse">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="javascript:void(0)">
+				<img width="60" src="img/logo.png"></img>
+			</a>
+		</div>
+		<div class="navbar-collapse collapse navbar-inverse-collapse">
+			<ul class="nav navbar-nav">
+				<li class="active" id="inicio"><a href="javascript:void(0)">Inicio</a></li>
+				<li><a href="pages/registro.html">Registro</a></li>
+				<li><a href="pages/confirmacion-participantes">Confirmación</a></li>
+				<li class="dropdown" id="imprimir">
+					<a data-target="#" class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">Certificados <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li id="pescador"><a href="ponentes.html">Pescadores</a></li>
+						<li id="participantes"><a href="participantes.html">Participantes</a></li>
+					</ul>
+				</li>
+				<li class="dropdown" id="imprimir">
+					<a data-target="#" class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">Listar <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li id="pescador"><a href="listar-pescadores.html">Pescadores</a></li>
+						<li id="participantes"><a href="listar-participantes.html">Participantes</a></li>
+			
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="javascript:void(0)"><strong><div class="text-left" id="clockDiv"></div></strong></a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="well">
+					<div class="row">
+						<div class="col-md-6">
+							<h3 class="text-center secundary-text">Bienvenidos al</h3>
+							<h2 class="text-center secundary-text">I Encuentro Regional Sucre Potencia Pesquera y Acuicola.</h2>
+							<div id="cumana" class="text-center">
+								<img src="img/cumana.jpg" alt="" width="200" style="margin-top:49px;">
+							</div>
+						</div>
+						<div class="col-md-4 col-md-offset-1">
+							<div class="panel panel-info" style="margin-top:50px;">
+								<div class="panel-heading text-center">
+									<p>Estadisticas del Evento</p>
+								</div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-md-10">
+											<p class="">
+												<span class="fa-stack fa-lg">
+												 <i class="fa fa-circle fa-stack-2x"></i>
+													<i class="fa fa-line-chart fa-stack-1x fa-inverse"></i>
+												</span>
+												Pescadores Reistrados
+											</p>
+										</div>
+										<div class="col-md-2 text-right">
+											<span class="badge" id="cantidad_e"></span>
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-md-10">
+											<p class="">
+												<span class="fa-stack fa-lg">
+												 <i class="fa fa-circle fa-stack-2x"></i>
+													<i class="fa fa-briefcase fa-stack-1x fa-inverse"></i>
+												</span>
+												Funcionarios Públicos Registrados
+											</p>
+										</div>
+										<div class="col-md-2 text-right">
+											<span class="badge" id="cantidad_fp"></span>
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-md-10">
+											<p class="">
+												<span class="fa-stack fa-lg">
+												 <i class="fa fa-circle fa-stack-2x"></i>
+													<i class="fa fa-briefcase fa-stack-1x fa-inverse"></i>
+												</span>
+												Funcionarios Privado Registrados
+											</p>
+										</div>
+										<div class="col-md-2 text-right">
+											<span class="badge" id="cantidad_fpv"></span>
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-md-10">
+											<p class="">
+												<span class="fa-stack fa-lg">
+												 <i class="fa fa-circle fa-stack-2x"></i>
+													<i class="fa fa-user fa-stack-1x fa-inverse"></i>
+												</span>
+												Personas por Comunidad Registradas
+											</p>
+										</div>
+										<div class="col-md-2 text-right">
+											<span class="badge" id="cantidad_c"></span>
+										</div>
+									</div>
+									<!-- <br>
+									<div class="row">
+										<div class="col-md-10">
+											<p class="">
+												<span class="fa-stack fa-lg">
+												 <i class="fa fa-circle fa-stack-2x"></i>
+													<i class="fa fa-user fa-stack-1x fa-inverse"></i>
+												</span>
+												Comite Organizativo y Logística
+											</p>
+										</div>
+										<div class="col-md-2 text-right">
+											<span class="badge" id="cantidad_col"></span>
+										</div>
+									</div> -->
+									<br>
+									<div class="row">
+										<div class="col-md-10">
+											<p class="">
+												<span class="fa-stack fa-lg">
+												 <i class="fa fa-circle fa-stack-2x"></i>
+													<i class="fa fa-users fa-stack-1x fa-inverse"></i>
+												</span>
+												Total de Participantes Registrados
+											</p>
+										</div>
+										<div class="col-md-2 text-right">
+											<span class="badge" id="total_p"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-12 text-center"><h4></h4></div>
+								<div class="col-md-10 col-md-offset-1">
+									<img src="img/cintillo/patrocinanctes.png" class="img-responsive">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<style type="text/css">
+	#cumana {
+			background-color: #FFF;
+			width: 280px;
+			height: 280px;
+			margin: 20px auto;
+			border-top-left-radius: 50%;
+			border-top-right-radius: 50%;
+			border-bottom-left-radius: 50%;
+			border-bottom-right-radius: 50%;
+			vertical-align: middle;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.23), 0px 0px 10px rgba(0, 0, 0, 0.23);
+		}
+</style>
+
+<script type="text/javascript">
+	function clock() {
+		var now = new Date();
+		
+		var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+ 
+    hour = ( hour < 10 )? "0"+hour : hour;
+    minute = ( minute < 10 )? "0"+minute : minute;
+    second = ( second < 10 )? "0"+second : second;
+
+		var outStr = hour+':'+minute+':'+second;
+		var date = hora();
+		document.getElementById('clockDiv').innerHTML=date+' - '+outStr;
+		setTimeout('clock()',1000);
+	}
+
+	function hora () {
+    var now = new Date();    
+    var monthsMay = new Array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Dicimbre');
+    var monthsMin = new Array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'dicimbre');
+    var days = new Array('Domingo', 'Lunes', 'Martes', 'Miécoles', 'Jueves', 'Viernes', 'Sábado');
+ 
+    var date = now.getDate();
+    if (date < 10) {date = "0"+date};
+    var year = now.getFullYear();
+    var month = now.getMonth();
+    var day = now.getDay();
+
+    var datetime = ''+days[day]+' '+date+' '+monthsMin[month]+' '+year;
+    return datetime;
+    $("#clockDiv").html(datetime);
+  };
+  clock();
+</script>   
+
+<!-- <script>
+	$('#form-ftas').validator();
+</script> -->

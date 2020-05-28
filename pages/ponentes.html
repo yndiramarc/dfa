@@ -1,0 +1,43 @@
+<!--
+	/**
+	*  Definición de la interfaz 'Sistema de Registro y Estadisticas de Participantes'.
+	*
+	*  Permite registrar, confirmar, listar, exportar e imprimir la entrada al evento de los participantes.
+	*
+	*  @author Jonatha Solorzano <jonathasolorzano@gmail.com>
+	*  @license http://www.gnu.org/licenses/gpl.html
+	*	 GNU General Public License
+	*  @copyright Copyright (c) 2014, FUNDACITE Sucre
+	* 
+	*  @version 2015.04.27
+	*/
+ -->
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap-table/src/bootstrap-table.css">
+	<title>Ponentes</title>
+	<script src="../js/jquery-1.11.2.js"></script>
+	<script src="bootstrap-table/src/bootstrap-table.js"></script>
+	<script src="bootstrap-table/src/locale/bootstrap-table-es-MX.js"></script>
+</head>
+<body>
+	<h1 class="text-center">Certificados de Ponentes</h1>
+	<div class="row">
+		<div class="col-md-12">
+			<table data-toggle="table" data-url="/gh/get/response.json/wenzhixin/bootstrap-table/tree/master/docs/data/data1/" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true">
+				<thead>
+					<tr>
+						<th data-field="name">Name</th>
+						<th data-field="stargazers_count">Stars</th>
+						<th data-field="forks_count">Forks</th>
+						<th data-field="description">Description</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

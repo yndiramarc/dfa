@@ -1,0 +1,43 @@
+1.- Dependencias para el sistema
+	
+	* mysql-server
+		
+		- La contraseña debe ser root para que pueda funcionar el sistema (Si no es la contrasela lea la nota del paso 1).
+	
+	* phpmyadmin
+	
+	* php5
+	
+	* apache2
+
+	Nota: Si mysql-server ya esta instalado entonces solo debe cambiarse la contraseña de	usuario dentro de la sentencias '$conect = mysql_connect("localhost","root","contaseña");' en los archivos: conect.php - consultar.php - pdf_foro_acuicultura_certificados.php - que estan en el directorio 'data' dentro del sistema
+
+---------------------------------------------------------------
+
+2.- Directorio para el sistema
+
+	* La carpeta '01-Sistema de Registro y Estadisticas' debe ir colocada en el directorio '/var/www/'
+	del sistema.
+	
+	* Si dentro del directorio '/va/www/' existe un archivo llamado 'index.htm' se debe eliminar o
+	colocarlo en otro directorio para que pueda ser visualizada la carpeta en el navegador.
+	
+	* En el navegador debe escribirse 'localhost' ó '127.0.0.1' para acceder a la carpeta del sistema.
+
+---------------------------------------------------------------
+
+3.- Base de datos
+
+	* Para levantar la base de datos puede realiarse desde el administrador de base de datos gráfico
+	phpmyadmin escribiendo en el navegador 'localhost/phpmyadmin' ó '127.0.0.1/phpmyadmin' y colocar el usuario 'root' y la contraseña 'root' (u otra establecida y configurada previamente en los archivos). La base de datos esta guardada en el directorio '01-Sistema de Registro y Estadisticas/sql/'
+
+	* Tambien se puede levantar desde la consola (Se debe crear una base de datos previamente con phpmyadmin
+	llamada 'registro-foro2' con cotejamiento 'utf8_bin'), con el siguiente comando:
+		
+		- mysql -u root -pcontraseña registro-foro2 < registro-foro2.sql
+
+		Nota: antes de realizar el comando en la consola debe estar ubicado en el directorio '01-Sistema de Registro y Estadisticas/sql/'
+
+---------------------------------------------------------------
+
+4.- Listo para usarse
